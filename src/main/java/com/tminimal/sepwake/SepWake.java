@@ -1,14 +1,12 @@
 package com.tminimal.sepwake;
-import com.tminimal.sepwake.gui.MainWnd;
 
-import javax.swing.JFrame;
-import javax.swing.JButton;
+import com.tminimal.sepwake.gui.MainWnd;
+import com.tminimal.sepwake.gui.Window;
 
 public class SepWake {
 
     public static void main(String[] args) {
         System.out.println("Hello World");
-        MainWnd aa  = new MainWnd();
-
+        Window aa = new MainWnd();
     }
 }
