@@ -1,7 +1,7 @@
 package com.tminimal.sepwake;
 
-import com.tminimal.sepwake.gui.MainWnd;
-import com.tminimal.sepwake.gui.Window;
+import com.tminimal.sepwake.gui.wnd.MainWnd;
+import com.tminimal.sepwake.gui.wnd.Window;
 
 public class SepWake {
 
