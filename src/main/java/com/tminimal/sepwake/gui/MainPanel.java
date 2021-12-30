@@ -15,6 +15,14 @@ public class MainPanel extends JPanel {
         this.setLayout(new GridLayout(11, 1));
         this.add(box);
 
+        box.addActionListener(e -> {
+            if (box.isSelected()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "im selected");
+            } else {
+                javax.swing.JOptionPane.showMessageDialog(this, "im deselected");
+            }
+        });
+
         for (int i=0; i<10; i++) {
             JButton b = new JButton((i+1) + "번째 버튼");
             this.add(b);
