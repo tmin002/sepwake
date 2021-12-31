@@ -10,8 +10,5 @@ public class SepWake {
     public static void main(String[] args) {
         System.out.println("Hello World");
         Window aa = new MainWnd();
-        try {
-            UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
-        }  catch (Exception ignored) { }
     }
 }
