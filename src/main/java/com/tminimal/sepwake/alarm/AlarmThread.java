@@ -35,12 +35,14 @@ public class AlarmThread {
         alarmEventList.add(ae);
     }
 
-    private void raiseAlarmEvent(AlarmEventType aet) {
-        for (AlarmEvent ae : alarmEventList) {
-            if (aet == AlarmEventType.RING) ae.onRing();
-            else if (aet == AlarmEventType.SLEEPSTART) ae.onSleepStart();
-            else if (aet == AlarmEventType.PRESLEEPSTART) ae.onPreSleepStart();
-        }
+    private void raiseRingEvent() {
+        for (AlarmEvent ae : alarmEventList) ae.onRing();
+    }
+    private void raisePreSleepStartEvent() {
+        for (AlarmEvent ae : alarmEventList) ae.onPreSleepStart();
+    }
+    private void raiseSleepStartEvent() {
+        for (AlarmEvent ae : alarmEventList) ae.onSleepStart();
     }
 
     // Thread job
@@ -63,9 +65,9 @@ public class AlarmThread {
                        ring = new Time(Time.minutesModularAdd(sleepStart.tm(), t.sleepPeriod));
                    }
 
-                    if (preSleepStart.isSameWith(Time.getCurrentTime())) raiseAlarmEvent(AlarmEventType.RING);
-                    else if (sleepStart.isSameWith(Time.getCurrentTime())) raiseAlarmEvent(AlarmEventType.SLEEPSTART);
-                    else if (ring.isSameWith(Time.getCurrentTime())) raiseAlarmEvent(AlarmEventType.PRESLEEPSTART);
+                    if (preSleepStart.isSameWith(Time.getCurrentTime())) raiseRingEvent();
+                    else if (sleepStart.isSameWith(Time.getCurrentTime())) raiseSleepStartEvent();
+                    else if (ring.isSameWith(Time.getCurrentTime())) raisePreSleepStartEvent();
                 }
             }
         }
