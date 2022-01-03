@@ -9,9 +9,9 @@ public abstract class Alarm {
     public String onPreSleepStartScript;
     public String onSleepStartScript;
     public String onRingScript;
-    public boolean enabled;
-    public boolean preSleepEnabled;
-    public int count;
+    public boolean enabled = true;
+    public boolean preSleepEnabled = true;
+    public int count = 0;
 
     // Alarm wait thread
     public AlarmThread waitThread;
