@@ -1,0 +1,22 @@
+alarms:
+  testStaticAlarm1:
+    type: 'static'
+    onPreSleepStartScript: ''
+    onSleepStartScript: ''
+    onRingScript: ''
+    enabled: true
+    preSleepEnabled: true
+    count: 0
+    preSleepStartTime: '23:30'
+    sleepStartTime: '0:0'
+    ringTime: '7:0'
+
+  testTimerAlarm1:
+    type: 'timer'
+    onPreSleepStartScript: ''
+    onSleepStartScript: ''
+    onRingScript: ''
+    enabled: true
+    preSleepEnabled: true
+    count: 0
+
