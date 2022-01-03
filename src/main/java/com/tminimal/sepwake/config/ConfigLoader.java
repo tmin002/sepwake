@@ -18,7 +18,6 @@ public class ConfigLoader {
     public static String configFilePath = SepWake.SEPWAKE_PWD + "/sepwake.yaml";
 
     public static Map<String, Object> getRawData() {
-        d.s(configFilePath);
         try {
             return new Yaml().load(new FileReader(configFilePath));
         } catch (FileNotFoundException e) {
@@ -26,6 +25,12 @@ public class ConfigLoader {
         }
     }
 
+    // Settings load (might use lombok in future version)
+    public static void loadSettings(Map<String, Object> rawData) {
+
+    }
+
+    // Alarm load (might use lombok in future version)
     @SuppressWarnings("unchecked")
     public static ArrayList<Alarm> parseAlarmList(Map<String, Object> rawData) {
         ArrayList<Alarm> alarmList = new ArrayList<>();
@@ -69,15 +74,6 @@ public class ConfigLoader {
         for (Map.Entry<String, Object> en : rawData.entrySet()) {
             String key = en.getKey();
             switch (key) {
-                case "onPreSleepStartScript":
-                    a.onPreSleepStartScript = (String) en.getValue();
-                    break;
-                case "onSleepStartScript":
-                    a.onSleepStartScript = (String) en.getValue();
-                    break;
-                case "onRingScript":
-                    a.onRingScript = (String) en.getValue();
-                    break;
                 case "enabled":
                     a.enabled = (boolean) en.getValue();
                     break;
@@ -112,15 +108,6 @@ public class ConfigLoader {
         for (Map.Entry<String, Object> en : rawData.entrySet()) {
             String key = en.getKey();
             switch (key) {
-                case "onPreSleepStartScript":
-                    a.onPreSleepStartScript = (String) en.getValue();
-                    break;
-                case "onSleepStartScript":
-                    a.onSleepStartScript = (String) en.getValue();
-                    break;
-                case "onRingScript":
-                    a.onRingScript = (String) en.getValue();
-                    break;
                 case "enabled":
                     a.enabled = (boolean) en.getValue();
                     break;

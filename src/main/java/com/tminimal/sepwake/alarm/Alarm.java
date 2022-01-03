@@ -5,9 +5,6 @@ import java.util.ArrayList;
 public abstract class Alarm {
 
     public String name;
-    public String onPreSleepStartScript;
-    public String onSleepStartScript;
-    public String onRingScript;
     public boolean enabled = true;
     public boolean preSleepEnabled = true;
     public int count = 0;
