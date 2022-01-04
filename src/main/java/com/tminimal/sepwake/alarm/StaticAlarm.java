@@ -18,10 +18,6 @@ public class StaticAlarm extends Alarm {
 
                 StaticAlarm sa = (StaticAlarm) this.alarm;
                 int tm = Time.getCurrentTime().tm();
-                d.s(sa.ringTime.tm());
-                d.s(sa.sleepStartTime.tm());
-                d.s(sa.preSleepStartTime.tm());
-                d.s(tm);
 
                 if (sa.enabled){
                     if (sa.ringTime.tm() == tm) {

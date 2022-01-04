@@ -1,0 +1,75 @@
+package com.tminimal.sepwake.config;
+
+import com.sun.javafx.collections.MappingChange;
+import com.tminimal.sepwake.alarm.Alarm;
+import com.tminimal.sepwake.alarm.StaticAlarm;
+import com.tminimal.sepwake.alarm.Time;
+import com.tminimal.sepwake.alarm.TimerAlarm;
+import com.tminimal.sepwake.d;
+import org.yaml.snakeyaml.DumperOptions;
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+public class ConfigSaver {
+    private ConfigSaver() {}
+
+    public static void saveConfig() throws IOException{
+        new FileWriter(ConfigLoader.configFilePath).write(dumpConfig());
+    }
+
+    public static void printCurrentConfig() {
+        d.s(dumpConfig());
+    }
+
+    private static String dumpConfig() {
+        Map<String, Object> rawList = new HashMap<>();
+        addSettings(rawList);
+        addAlarmConfigs(rawList);
+
+        DumperOptions opt = new DumperOptions();
+        opt.setIndent(2);
+        opt.setPrettyFlow(true);
+        opt.setDefaultFlowStyle(DumperOptions.FlowStyle.BLOCK);
+
+        return new Yaml(opt).dump(rawList);
+    }
+
+    private static void addAlarmConfigs(Map<String, Object> map) {
+        Map<String, Object> alarmList = new LinkedHashMap<>();
+        map.put("alarms", alarmList);
+
+        for (Alarm a : Alarm.getAlarmList()) {
+            Map<String, Object> alarmMap = new LinkedHashMap<>();
+            alarmList.put(a.name, alarmMap);
+
+            if (a instanceof StaticAlarm) {
+                StaticAlarm sa = (StaticAlarm) a;
+                alarmMap.put("type", "static");
+                alarmMap.put("preSleepStartTime", Time.parseStringToTime(sa.preSleepStartTime));
+                alarmMap.put("sleepStartTime", Time.parseStringToTime(sa.sleepStartTime));
+                alarmMap.put("ringTime", Time.parseStringToTime(sa.ringTime));
+            } else if (a instanceof TimerAlarm) {
+                TimerAlarm ta = (TimerAlarm) a;
+                alarmMap.put("type", "timer");
+                alarmMap.put("startTime", Time.parseStringToTime(ta.startTime));
+                alarmMap.put("preSleepPeriod", ta.preSleepPeriod);
+                alarmMap.put("sleepPeriod", ta.sleepPeriod);
+            }
+
+            alarmMap.put("enabled", a.enabled);
+            alarmMap.put("preSleepEnabled", a.preSleepEnabled);
+            alarmMap.put("count", a.count);
+        }
+    }
+
+    private static void addSettings(Map<String, Object> map) {
+
+    }
+
+}

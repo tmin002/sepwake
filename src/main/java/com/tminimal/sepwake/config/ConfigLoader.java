@@ -5,7 +5,6 @@ import com.tminimal.sepwake.alarm.Alarm;
 import com.tminimal.sepwake.alarm.StaticAlarm;
 import com.tminimal.sepwake.alarm.Time;
 import com.tminimal.sepwake.alarm.TimerAlarm;
-import com.tminimal.sepwake.d;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileNotFoundException;
@@ -13,16 +12,25 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Map;
 
+@SuppressWarnings("unchecked")
 public class ConfigLoader {
+    private ConfigLoader() {}
 
     public static String configFilePath = SepWake.SEPWAKE_PWD + "/sepwake.yaml";
 
-    public static Map<String, Object> getRawData() {
-        try {
-            return new Yaml().load(new FileReader(configFilePath));
-        } catch (FileNotFoundException e) {
-            return null;
+    public static void loadConfig() throws FileNotFoundException {
+        Map<String, Object> rawYaml = ConfigLoader.getRawData();
+
+        if (rawYaml != null) {
+            ConfigLoader.loadSettings(rawYaml);
+            Alarm.resetAlarmListTo(ConfigLoader.parseAlarmList(rawYaml));
+        } else {
+            throw new NullPointerException("Empty configuration file");
         }
+    }
+
+    public static Map<String, Object> getRawData() throws FileNotFoundException {
+        return new Yaml().load(new FileReader(configFilePath));
     }
 
     // Settings load (might use lombok in future version)
@@ -31,7 +39,6 @@ public class ConfigLoader {
     }
 
     // Alarm load (might use lombok in future version)
-    @SuppressWarnings("unchecked")
     public static ArrayList<Alarm> parseAlarmList(Map<String, Object> rawData) {
         ArrayList<Alarm> alarmList = new ArrayList<>();
         Map<String, Object> rawList = (Map<String, Object>) rawData.get("alarms");
@@ -48,8 +55,6 @@ public class ConfigLoader {
                         added = alarmList.add(parseStaticAlarm(alarmMap, alarmName));
                     } else if (type.equals("timer")) {
                         added = alarmList.add(parseTimerAlarm(alarmMap, alarmName));
-                    } else {
-                        // todo: wrong type.
                     }
 
                     if (added) break;
@@ -58,12 +63,6 @@ public class ConfigLoader {
         }
 
         return alarmList;
-    }
-
-    // Only used for parseAlarmList.
-    private static Time parseTimeString(String timeFormatString) {
-        String[] split = timeFormatString.split(":");
-        return new Time(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
     }
 
     // Only used for parseAlarmList.
@@ -84,16 +83,16 @@ public class ConfigLoader {
                     a.count = (int) en.getValue();
                     break;
                 case "preSleepStartTime":
-                    a.preSleepStartTime = parseTimeString((String) en.getValue());
+                    a.preSleepStartTime = Time.parseTimeString((String) en.getValue());
                     break;
                 case "sleepStartTime":
-                    a.sleepStartTime = parseTimeString((String) en.getValue());
+                    a.sleepStartTime = Time.parseTimeString((String) en.getValue());
                     break;
                 case "ringTime":
-                    a.ringTime = parseTimeString((String) en.getValue());
+                    a.ringTime = Time.parseTimeString((String) en.getValue());
                     break;
                 default:
-                    // todo: wrong type.
+                    // wrong type (which cannot exist tho)
                     break;
             }
         }
@@ -118,7 +117,7 @@ public class ConfigLoader {
                     a.count = (int) en.getValue();
                     break;
                 case "startTime":
-                    a.startTime = parseTimeString((String) en.getValue());
+                    a.startTime = Time.parseTimeString((String) en.getValue());
                     break;
                 case "preSleepPeriod":
                     a.preSleepPeriod = (int) en.getValue();
@@ -127,7 +126,7 @@ public class ConfigLoader {
                     a.sleepPeriod = (int) en.getValue();
                     break;
                 default:
-                    // todo: wrong type.
+                    // wrong type (which cannot exist tho)
                     break;
             }
         }

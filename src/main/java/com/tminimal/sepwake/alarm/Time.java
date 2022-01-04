@@ -36,4 +36,18 @@ public class Time {
         return (totalMinutes + minutesToAdd) % (24*60);
     }
 
+    public static Time parseTimeString(String timeFormatString) {
+        String[] split = timeFormatString.split(":");
+        return new Time(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
+    }
+    public static String parseStringToTime(Time time) {
+        String h = "", m = "";
+
+        if (time.h()<10) h += "0";
+        if (time.m()<10) m += "0";
+        h += String.valueOf(time.h());
+        m += String.valueOf(time.m());
+
+        return h+":"+m;
+    }
 }
