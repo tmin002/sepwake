@@ -1,17 +1,1 @@
-alarms:
-  TestStatic1:
-    type: 'static'
-    preSleepStartTime: '23:30'
-    sleepStartTime: '00:00'
-    ringTime: '07:00'
-    enabled: true
-    preSleepEnabled: true
-    count: 0
-  TestTimer1:
-    type: 'timer'
-    startTime: '23:30'
-    preSleepPeriod: 30
-    sleepPeriod: 420
-    enabled: true
-    preSleepEnabled: true
-    count: 0
+a

@@ -33,6 +33,7 @@ public class SepWake {
     private static void setup() throws Exception {
         ConfigLoader.loadConfig();
         ConfigSaver.printCurrentConfig();
+        ConfigSaver.saveConfig();
 
     }
 }

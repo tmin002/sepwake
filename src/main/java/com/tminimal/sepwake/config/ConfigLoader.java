@@ -18,7 +18,7 @@ public class ConfigLoader {
 
     public static String configFilePath = SepWake.SEPWAKE_PWD + "/sepwake.yaml";
 
-    public static void loadConfig() throws FileNotFoundException {
+    public static void loadConfig() throws NullPointerException, FileNotFoundException {
         Map<String, Object> rawYaml = ConfigLoader.getRawData();
 
         if (rawYaml != null) {
