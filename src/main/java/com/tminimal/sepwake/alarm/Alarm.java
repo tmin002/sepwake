@@ -11,6 +11,9 @@ public abstract class Alarm {
 
     // Alarm wait thread
     public AlarmThread waitThread;
+    public void setAlarmThread(AlarmThread alarmThread) {
+        waitThread = alarmThread;
+    }
 
     // Alarm list
     private static ArrayList<Alarm> alarmList = new ArrayList<>();

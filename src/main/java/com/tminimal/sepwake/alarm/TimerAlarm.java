@@ -9,7 +9,7 @@ public class TimerAlarm extends Alarm {
     public int sleepPeriod = 420;
 
     public TimerAlarm() {
-        this.waitThread = new AlarmThread(this) {
+        this.setAlarmThread(new AlarmThread(this) {
             @Override
             public void waitLoop() throws InterruptedException {
                 int tm = Time.getCurrentTime().tm();
@@ -33,6 +33,6 @@ public class TimerAlarm extends Alarm {
                 }
                 Thread.sleep(1000 * (60 - LocalDateTime.now().getSecond()));
             }
-        };
+        });
     }
 }

@@ -12,7 +12,7 @@ public class StaticAlarm extends Alarm {
     public Time ringTime = new Time(7, 0);
 
     public StaticAlarm() {
-        this.waitThread = new AlarmThread(this) {
+        this.setAlarmThread(new AlarmThread(this) {
             @Override
             public void waitLoop() throws InterruptedException {
 
@@ -31,7 +31,7 @@ public class StaticAlarm extends Alarm {
 
                 Thread.sleep(1000 * (60 - LocalDateTime.now().getSecond()));
             }
-        };
+        });
     }
 
 }
