@@ -1,0 +1,4 @@
+#sdlfkjsdlkfafskdlfjsdfas
+좋은 아침입니다. 현재 시각은 %time% 입니다.
+오늘은 %date% 입니다. 오늘은 %count%번째 날입니다.
+좋은 하루 되세요.

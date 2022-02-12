@@ -1,7 +1,7 @@
 alarms:
   TestStatic1:
     type: 'static'
-    preSleepStartTime: '23:30'
+    preSleepStartTime: '22:10'
     sleepStartTime: '00:00'
     ringTime: '07:00'
     enabled: true
