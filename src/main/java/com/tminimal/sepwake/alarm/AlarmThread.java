@@ -1,6 +1,7 @@
 package com.tminimal.sepwake.alarm;
 
 import com.tminimal.sepwake.d;
+import com.tminimal.sepwake.gui.msgbox.MsgBox;
 
 import java.time.LocalDateTime;
 
@@ -28,6 +29,7 @@ public abstract class AlarmThread {
     }
 
     public abstract void waitLoop() throws InterruptedException;
+
     public void waitJobWrapper() {
         while (true) {
             try {

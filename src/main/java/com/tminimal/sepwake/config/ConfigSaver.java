@@ -6,6 +6,7 @@ import com.tminimal.sepwake.alarm.StaticAlarm;
 import com.tminimal.sepwake.alarm.Time;
 import com.tminimal.sepwake.alarm.TimerAlarm;
 import com.tminimal.sepwake.d;
+import com.tminimal.sepwake.gui.msgbox.MsgBox;
 import org.yaml.snakeyaml.DumperOptions;
 import org.yaml.snakeyaml.Yaml;
 
@@ -19,8 +20,12 @@ import java.util.Map;
 public class ConfigSaver {
     private ConfigSaver() {}
 
-    public static void saveConfig() throws IOException{
-        new FileWriter(ConfigLoader.configFilePath).write(dumpConfig());
+    public static void saveConfig() {
+        try {
+            new FileWriter(ConfigLoader.configFilePath).write(dumpConfig());
+        } catch (IOException e) {
+            MsgBox.show("Failed to save file. " + e);
+        }
     }
 
     public static void printCurrentConfig() {

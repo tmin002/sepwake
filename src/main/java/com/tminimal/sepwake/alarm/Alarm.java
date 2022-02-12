@@ -1,6 +1,10 @@
 package com.tminimal.sepwake.alarm;
 
+import com.tminimal.sepwake.d;
+
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public abstract class Alarm {
 
@@ -24,15 +28,15 @@ public abstract class Alarm {
     }
 
     public static void addAlarmToList(Alarm alarm) {
-       alarmList.add(alarm);
-       alarm.waitThread.startWait();
+        alarmList.add(alarm);
+        alarm.waitThread.startWait();
     }
 
-    public static void resetAlarmListTo(ArrayList<Alarm> alarmList) {
-        for (Alarm a : alarmList) {
-            a.waitThread.stopWait();
+    public static void resetAlarmListTo(ArrayList<Alarm> alarms) {
+        alarmList.clear();
+        for (Alarm a : alarms) {
+            addAlarmToList(a);
         }
-        Alarm.alarmList = alarmList;
     }
 
     // Alarm events
