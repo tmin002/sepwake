@@ -12,7 +12,6 @@ public class RingManager {
 
     public static void setRingEventListeners() {
         Alarm.addAlarmListener((type, alarm) -> {
-            d.s("im in");
             String script = "";
 
             if (type == AlarmEventType.RING) {
@@ -22,12 +21,7 @@ public class RingManager {
             } else if (type == AlarmEventType.PRESLEEPSTART) {
                 script = alarmScript.getPreSleepScript(alarm);
             }
-
-            try {
-                SepWake.defaultTTS.speak(script);
-            } catch (IOException e) {
-                d.s("Failed to initialize TTS.");
-            }
+            SepWake.defaultTTS.speakAsync(script);
 
             if (type == AlarmEventType.RING) {
                 alarm.count++;

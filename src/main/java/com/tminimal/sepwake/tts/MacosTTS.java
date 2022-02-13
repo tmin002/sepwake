@@ -11,24 +11,16 @@ public class MacosTTS extends TTS {
     public String voiceName = "Yuna";
 
     @Override
-    public void speak(String str) throws IOException {
-        Process say = Runtime.getRuntime().exec(new String[] {"say", "-v", voiceName, str});
-        d.s(str);
-
+    public void speak(String str) {
         try {
-            say.waitFor();
-        } catch (InterruptedException e) {
-            say.destroy();
-        }
-    }
-
-    @Override
-    public void speakScript(String[] script, int delayBetweenSentence) throws IOException {
-        for (String str : script) {
-            speak(str);
+            Process say = Runtime.getRuntime().exec(new String[] {"say", "-v", voiceName, str});
             try {
-                Thread.sleep(delayBetweenSentence);
-            } catch (InterruptedException ignored) {}
+                say.waitFor();
+            } catch (InterruptedException e) {
+                say.destroy();
+            }
+        } catch (IOException e) {
+            d.s("Failed to initialize TTS.");
         }
     }
 }
