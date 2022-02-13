@@ -22,9 +22,11 @@ public class StaticAlarm extends Alarm {
                 if (sa.enabled){
                     if (sa.ringTime.tm() == tm) {
                         raiseAlarmEvent(AlarmEventType.RING, sa);
-                    } else if (sa.sleepStartTime.tm() == tm) {
+                    }
+                    if (sa.sleepStartTime.tm() == tm) {
                         raiseAlarmEvent(AlarmEventType.SLEEPSTART, sa);
-                    } else if (sa.preSleepStartTime.tm() == tm && sa.preSleepEnabled) {
+                    }
+                    if (sa.preSleepStartTime.tm() == tm && sa.preSleepEnabled) {
                         raiseAlarmEvent(AlarmEventType.PRESLEEPSTART, sa);
                     }
                 }

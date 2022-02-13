@@ -64,7 +64,7 @@ public class SepWake {
         test.name = "CodeGeneratedStaticAlarm1";
         test.preSleepStartTime = new Time(h,m);
         test.sleepStartTime = new Time(h,m+1);
-        test.ringTime = new Time(h,m+70);
+        test.ringTime = new Time(h,m-1);
         Alarm.addAlarmToList(test);
     }
 }
