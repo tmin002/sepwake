@@ -35,4 +35,14 @@ public class TimerAlarm extends Alarm {
             }
         });
     }
+
+    public Time getPreSleepTime() {
+        return startTime;
+    }
+    public Time getSleepStartTime() {
+        return getPreSleepTime().addMinute(preSleepPeriod);
+    }
+    public Time getRingTime() {
+        return getSleepStartTime().addMinute(sleepPeriod);
+    }
 }

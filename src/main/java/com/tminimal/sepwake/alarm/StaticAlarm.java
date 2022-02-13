@@ -34,4 +34,11 @@ public class StaticAlarm extends Alarm {
         });
     }
 
+    public int getPreSleepPeriod() {
+        return Time.minuteModularSubtract(preSleepStartTime.tm(), sleepStartTime.tm());
+    }
+    public int getSleepPeriod() {
+        return Time.minuteModularSubtract(sleepStartTime.tm(), ringTime.tm());
+    }
+
 }

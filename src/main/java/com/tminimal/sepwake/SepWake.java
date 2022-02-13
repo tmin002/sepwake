@@ -15,6 +15,8 @@ import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Map;
@@ -51,5 +53,18 @@ public class SepWake {
         alarmScript.loadAlarmScript();
         RingManager.setRingEventListeners();
         ConfigLoader.loadConfig();
+
+        experiment(); // debugging
+        ConfigSaver.printCurrentConfig();
+    }
+
+    private static void experiment() {
+        int h = LocalDateTime.now().getHour(), m = LocalDateTime.now().getMinute();
+        StaticAlarm test = new StaticAlarm();
+        test.name = "CodeGeneratedStaticAlarm1";
+        test.preSleepStartTime = new Time(h,m);
+        test.sleepStartTime = new Time(h,m+1);
+        test.ringTime = new Time(h,m+70);
+        Alarm.addAlarmToList(test);
     }
 }

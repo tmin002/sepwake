@@ -83,13 +83,13 @@ public class ConfigLoader {
                     a.count = (int) en.getValue();
                     break;
                 case "preSleepStartTime":
-                    a.preSleepStartTime = Time.parseTimeString((String) en.getValue());
+                    a.preSleepStartTime = Time.stringToTimeInstance((String) en.getValue());
                     break;
                 case "sleepStartTime":
-                    a.sleepStartTime = Time.parseTimeString((String) en.getValue());
+                    a.sleepStartTime = Time.stringToTimeInstance((String) en.getValue());
                     break;
                 case "ringTime":
-                    a.ringTime = Time.parseTimeString((String) en.getValue());
+                    a.ringTime = Time.stringToTimeInstance((String) en.getValue());
                     break;
                 default:
                     // wrong type (which cannot exist tho)
@@ -117,7 +117,7 @@ public class ConfigLoader {
                     a.count = (int) en.getValue();
                     break;
                 case "startTime":
-                    a.startTime = Time.parseTimeString((String) en.getValue());
+                    a.startTime = Time.stringToTimeInstance((String) en.getValue());
                     break;
                 case "preSleepPeriod":
                     a.preSleepPeriod = (int) en.getValue();

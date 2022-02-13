@@ -1,3 +1,8 @@
+# tmin002 custom
+.DS_Store
+out/
+build/
+
 # Compiled class file
 *.class
 

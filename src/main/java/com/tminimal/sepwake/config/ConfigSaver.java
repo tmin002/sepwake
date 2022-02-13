@@ -56,13 +56,13 @@ public class ConfigSaver {
             if (a instanceof StaticAlarm) {
                 StaticAlarm sa = (StaticAlarm) a;
                 alarmMap.put("type", "static");
-                alarmMap.put("preSleepStartTime", Time.parseStringToTime(sa.preSleepStartTime));
-                alarmMap.put("sleepStartTime", Time.parseStringToTime(sa.sleepStartTime));
-                alarmMap.put("ringTime", Time.parseStringToTime(sa.ringTime));
+                alarmMap.put("preSleepStartTime", sa.preSleepStartTime.toString());
+                alarmMap.put("sleepStartTime", sa.sleepStartTime.toString());
+                alarmMap.put("ringTime", sa.ringTime.toString());
             } else if (a instanceof TimerAlarm) {
                 TimerAlarm ta = (TimerAlarm) a;
                 alarmMap.put("type", "timer");
-                alarmMap.put("startTime", Time.parseStringToTime(ta.startTime));
+                alarmMap.put("startTime", ta.startTime.toString());
                 alarmMap.put("preSleepPeriod", ta.preSleepPeriod);
                 alarmMap.put("sleepPeriod", ta.sleepPeriod);
             }
