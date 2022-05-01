@@ -5,6 +5,7 @@ import com.tminimal.sepwake.alarm.Alarm;
 import com.tminimal.sepwake.alarm.StaticAlarm;
 import com.tminimal.sepwake.alarm.Time;
 import com.tminimal.sepwake.alarm.TimerAlarm;
+import com.tminimal.sepwake.gui.msgbox.MsgBox;
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.FileNotFoundException;
@@ -43,24 +44,25 @@ public class ConfigLoader {
         ArrayList<Alarm> alarmList = new ArrayList<>();
         Map<String, Object> rawList = (Map<String, Object>) rawData.get("alarms");
 
-        for (String alarmName : rawList.keySet()) {
-            Map<String, Object> alarmMap = (Map<String, Object>) rawList.get(alarmName);
+        if (rawList != null)
+            for (String alarmName : rawList.keySet()) {
+                Map<String, Object> alarmMap = (Map<String, Object>) rawList.get(alarmName);
 
-            for (String key : alarmMap.keySet()) {
-                if (key.equals("type")) {
-                    String type = (String) alarmMap.get(key);
-                    boolean added = false;
+                for (String key : alarmMap.keySet()) {
+                    if (key.equals("type")) {
+                        String type = (String) alarmMap.get(key);
+                        boolean added = false;
 
-                    if (type.equals("static")) {
-                        added = alarmList.add(parseStaticAlarm(alarmMap, alarmName));
-                    } else if (type.equals("timer")) {
-                        added = alarmList.add(parseTimerAlarm(alarmMap, alarmName));
+                        if (type.equals("static")) {
+                            added = alarmList.add(parseStaticAlarm(alarmMap, alarmName));
+                        } else if (type.equals("timer")) {
+                            added = alarmList.add(parseTimerAlarm(alarmMap, alarmName));
+                        }
+
+                        if (added) break;
                     }
-
-                    if (added) break;
                 }
             }
-        }
 
         return alarmList;
     }
