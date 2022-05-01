@@ -1,5 +1,10 @@
 # tmin002 custom
 .DS_Store
+sapi.vbs
+script_presleep.txt
+script_sleepstart.txt
+script_wakeup.txt
+sepwake.yaml
 out/
 build/
 
